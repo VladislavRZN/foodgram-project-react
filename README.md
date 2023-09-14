@@ -172,9 +172,7 @@
 <br>
 
 ## Автор <a id=author></a>
-    ```bash
     Буганов Владислав
     https://github.com/VladislavRZN
     vladislav-buganov@yandex.ru
     Telegram: @VladDnD
-    ```
