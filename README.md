@@ -24,7 +24,7 @@
 
 Проект «Фудграм» — сайт, на котором пользователи могут публиковать рецепты, добавлять чужие рецепты в избранное и подписываться на публикации других авторов. Пользователям сайта также доступен сервис «Список покупок». Он позволит создавать список продуктов, которые нужно купить для приготовления выбранных блюд. 
 
-Проект доступен по [адресу](https://recipes.ddns.net)   
+Проект доступен по [адресу](http://foodgramrzn.ddns.net/)
 
 ## Установка <a id=run></a>
 
@@ -47,8 +47,8 @@
 
     ```bash
     cd ..
-    docker build -t vladrzn/foodgram_backend:latest backend/
-    docker build -t vladrzn/foodgram_frontend:latest frontend/
+    docker build -t username/foodgram_backend:latest backend/
+    docker build -t username/foodgram_frontend:latest frontend/
     ```
 
 2. Загрузите образы на DockerHub:
@@ -172,8 +172,7 @@
 <br>
 
 ## Автор <a id=author></a>
-
-Буганов Владислав
-https://github.com/VladislavRZN
-vladislav-buganov@yandex.ru
-Telegram: @VladDnD
+    Буганов Владислав
+    https://github.com/VladislavRZN
+    vladislav-buganov@yandex.ru
+    Telegram: @VladDnD
