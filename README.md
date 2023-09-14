@@ -172,8 +172,9 @@
 <br>
 
 ## Автор <a id=author></a>
-
-Буганов Владислав
-https://github.com/VladislavRZN
-vladislav-buganov@yandex.ru
-Telegram: @VladDnD
+    ```bash
+    Буганов Владислав
+    https://github.com/VladislavRZN
+    vladislav-buganov@yandex.ru
+    Telegram: @VladDnD
+    ```
