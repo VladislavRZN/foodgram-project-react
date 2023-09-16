@@ -125,4 +125,3 @@ class RecipeViewSet(viewsets.ModelViewSet):
                          for ingredient in ingredients]
         txt_file = HttpResponse('Cписок покупок:\n' + '\n'.join(shopping_list),
                                 content_type='text/plain')
-
