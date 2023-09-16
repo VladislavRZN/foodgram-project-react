@@ -2,6 +2,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from users.models import User
 
+LONG=200
 
 class Tag(models.Model):
     """
@@ -14,13 +15,13 @@ class Tag(models.Model):
     """
 
     name = models.CharField(
-        max_length=200,
+        max_length=LONG,
         db_index=True,
         verbose_name="Название тега",
     )
     color = models.CharField(max_length=7, verbose_name="Цветовой HEX-код")
     slug = models.SlugField(
-        max_length=200,
+        max_length=LONG,
         unique=True,
         verbose_name="Уникальный слаг",
     )
@@ -44,12 +45,12 @@ class Ingredient(models.Model):
     """
 
     name = models.CharField(
-        max_length=200,
+        max_length=LONG,
         db_index=True,
         verbose_name="Название ингредиента",
     )
     measurement_unit = models.CharField(
-        max_length=200,
+        max_length=LONG,
         verbose_name="Единицы измерения",
     )
 
@@ -90,7 +91,7 @@ class Recipe(models.Model):
         verbose_name="Автор публикации",
     )
     name = models.CharField(
-        max_length=200,
+        max_length=LONG,
         db_index=True,
         verbose_name="Название рецепта",
     )

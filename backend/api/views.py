@@ -96,8 +96,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         if request.method == "POST":
             return self.add_to(Favorite, request.user, pk)
-        else:
-            return self.delete_from(Favorite, request.user, pk)
+        return self.delete_from(Favorite, request.user, pk)
 
     @action(detail=True, methods=["post", "delete"])
     def shopping_cart(self, request, pk):
@@ -105,8 +104,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         if request.method == "POST":
             return self.add_to(ShoppingCart, request.user, pk)
-        else:
-            return self.delete_from(ShoppingCart, request.user, pk)
+        return self.delete_from(ShoppingCart, request.user, pk)
 
     @action(detail=False, permission_classes=[IsAuthenticated])
     def download_shopping_cart(self, request):
@@ -117,25 +115,17 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         ingredients = (
-            RecipeIngredient.objects.filter(
-                recipe__in_shopping_cart__user=user
-            )
-            .values("ingredient__name", "ingredient__measurement_unit")
-            .order_by("ingredient__name")
-            .annotate(amount=Sum("amount"))
+            RecipeIngredient.objects
+            .filter(recipelistsuser=request.user)
+            .values('ingredient')
+            .annotate(total_amount=Sum('amount'))
+            .values_list('ingredient__name',
+                         'ingredient__measurements_unit',
+                         'total_amount')
         )
+        shopping_list = [('{} ({}) - {}'.format(*ingredient) + '\n')
+                         for ingredient in ingredients]
+        txt_file = HttpResponse('Cписок покупок:\n' + '\n'.join(shopping_list),
+                                content_type='text/plain')
 
-        shopping_cart = f"Список покупок {user.get_full_name()}\n\n"
-        for ingredient in ingredients:
-            shopping_cart += (
-                f'{ingredient["ingredient__name"].capitalize()},'
-                f' {ingredient["amount"]}'
-                f' {ingredient["ingredient__measurement_unit"]}\n'
-            )
-        shopping_cart += f"\n\nFoodgram {datetime.today():%d-%m-%Y}"
-
-        filename = f"{user}_shopping_cart.txt"
-        response = HttpResponse(shopping_cart, content_type="text/plain")
         response["Content-Disposition"] = f"attachment; filename={filename}"
-
-        return response
